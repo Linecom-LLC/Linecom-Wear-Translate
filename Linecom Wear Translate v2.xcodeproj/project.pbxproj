@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		032AEC1A2D45235300CADBE7 /* Linecom Wear Translate v2 Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 032AEC192D45235300CADBE7 /* Linecom Wear Translate v2 Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		032AEC322D45245000CADBE7 /* LinecomKit in Frameworks */ = {isa = PBXBuildFile; productRef = 032AEC312D45245000CADBE7 /* LinecomKit */; };
+		032AEC352D45249900CADBE7 /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 032AEC342D45249900CADBE7 /* SwiftyStoreKit */; };
+		032AEC382D4525A600CADBE7 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 032AEC372D4525A600CADBE7 /* CachedAsyncImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				032AEC382D4525A600CADBE7 /* CachedAsyncImage in Frameworks */,
+				032AEC322D45245000CADBE7 /* LinecomKit in Frameworks */,
+				032AEC352D45249900CADBE7 /* SwiftyStoreKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +138,9 @@
 			);
 			name = "Linecom Wear Translate v2 Watch App";
 			packageProductDependencies = (
+				032AEC312D45245000CADBE7 /* LinecomKit */,
+				032AEC342D45249900CADBE7 /* SwiftyStoreKit */,
+				032AEC372D4525A600CADBE7 /* CachedAsyncImage */,
 			);
 			productName = "Linecom Wear Translate v2 Watch App";
 			productReference = 032AEC192D45235300CADBE7 /* Linecom Wear Translate v2 Watch App.app */;
@@ -164,6 +173,11 @@
 			);
 			mainGroup = 032AEC002D45235200CADBE7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				032AEC302D45245000CADBE7 /* XCRemoteSwiftPackageReference "LinecomKit" */,
+				032AEC332D45249900CADBE7 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
+				032AEC362D4525A600CADBE7 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 032AEC0A2D45235200CADBE7 /* Products */;
 			projectDirPath = "";
@@ -415,7 +429,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.linecom.Linecom-Wear-Translate-v2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -447,7 +461,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.linecom.Linecom-Wear-Translate-v2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -489,6 +503,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		032AEC302D45245000CADBE7 /* XCRemoteSwiftPackageReference "LinecomKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Linecom-Lik/LinecomKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		032AEC332D45249900CADBE7 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		032AEC362D4525A600CADBE7 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		032AEC312D45245000CADBE7 /* LinecomKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 032AEC302D45245000CADBE7 /* XCRemoteSwiftPackageReference "LinecomKit" */;
+			productName = LinecomKit;
+		};
+		032AEC342D45249900CADBE7 /* SwiftyStoreKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 032AEC332D45249900CADBE7 /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */;
+			productName = SwiftyStoreKit;
+		};
+		032AEC372D4525A600CADBE7 /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 032AEC362D4525A600CADBE7 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 032AEC012D45235200CADBE7 /* Project object */;
 }

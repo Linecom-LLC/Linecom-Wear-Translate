@@ -1,0 +1,51 @@
+{
+  "originHash" : "59b9337d5f76851e8cf590c6c50b5bfab2d826313e1bab150e902e8c5876a0ed",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire",
+      "state" : {
+        "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
+        "version" : "5.10.2"
+      }
+    },
+    {
+      "identity" : "linecomkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Linecom-Lik/LinecomKit",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2a025f50254b3348791923c1ac6da52e0262be86"
+      }
+    },
+    {
+      "identity" : "swiftui-cached-async-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lorenzofiamingo/swiftui-cached-async-image",
+      "state" : {
+        "revision" : "467a3d17479887943ab917a379e62bbaff60ac8a",
+        "version" : "2.1.1"
+      }
+    },
+    {
+      "identity" : "swiftyjson",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftyJSON/SwiftyJSON",
+      "state" : {
+        "revision" : "2b6054efa051565954e1d2b9da831680026cd768",
+        "version" : "4.3.0"
+      }
+    },
+    {
+      "identity" : "swiftystorekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bizz84/SwiftyStoreKit",
+      "state" : {
+        "branch" : "master",
+        "revision" : "48d4d4c0b6a66732eb45e2f0104fb7d080c67a69"
+      }
+    }
+  ],
+  "version" : 3
+}
