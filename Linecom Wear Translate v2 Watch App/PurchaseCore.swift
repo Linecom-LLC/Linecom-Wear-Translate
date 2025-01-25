@@ -35,6 +35,31 @@ class PurchaseCore {
         }
     }
     
+    func getPrice(pid: String) async -> String? {
+        return await withCheckedContinuation { continuation in
+            SwiftyStoreKit.retrieveProductsInfo([pid]) { result in
+                if let product = result.retrievedProducts.first {
+                    let priceString = product.localizedPrice ?? ""
+                    print("Fetched Product: \(product.localizedDescription), price: \(priceString)")
+                    
+                    let productInfo = ProductInfo(
+                        id: pid,
+                        localizedTitle: product.localizedTitle,
+                        localizedDescription: product.localizedDescription,
+                        price: priceString
+                    )
+                    continuation.resume(returning: priceString)
+                } else if let invalidProductId = result.invalidProductIDs.first {
+                    print("Invalid product identifier: \(invalidProductId)")
+                    continuation.resume(returning: nil)
+                } else {
+                    print("Error: \(String(describing: result.error))")
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
     func pruchaseProduct(pid: String) async -> Bool {
         
         return await withCheckedContinuation { continuation in
