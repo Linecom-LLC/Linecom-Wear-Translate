@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct SoftwareUpdateView: View {
+    #error("Not Completed")
+    @AppStorage("") var isUpdate: Bool = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                Section {
+                    NavigationLink(destination: PromptUpdateView()) {
+                        Text("提示更新")
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct PromptUpdateView: View {
+    var body: some View {
+        List {
+            Toggle("提示更新", isOn: .constant(true))
+        }
     }
 }
 
