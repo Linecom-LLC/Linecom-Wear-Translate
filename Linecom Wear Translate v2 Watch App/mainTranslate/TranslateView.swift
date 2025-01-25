@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  TranslateView.swift
 //  Linecom Wear Translate v2 Watch App
 //
 //  Created by 程炜栋 on 2025/1/25.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct TranslateView: View {
     var body: some View {
-        PurchaseView()
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
 #Preview {
-    ContentView()
+    TranslateView()
 }
