@@ -1,5 +1,5 @@
 {
-  "originHash" : "20c23608c4da3931c7108508755ca8b30c39df938f4bb89e365eeb94252a1010",
+  "originHash" : "6badda4018e00fc24674f610b817625c8c7d911321b8742edb072545311c733b",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -44,15 +44,6 @@
       "state" : {
         "revision" : "7aff8d1b31148d32c5933d75557d42f6323ee3d1",
         "version" : "6.0.0"
-      }
-    },
-    {
-      "identity" : "supportsuicore",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Darock-Studio/SupportsUICore",
-      "state" : {
-        "branch" : "main",
-        "revision" : "2460d64cf0419fd2606b08f24558496d8fe8a360"
       }
     },
     {

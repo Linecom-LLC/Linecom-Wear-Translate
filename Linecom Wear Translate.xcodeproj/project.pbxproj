@@ -41,7 +41,6 @@
 		03A1615E2CAD8B6600E9FC90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A1615D2CAD8B6600E9FC90 /* AppDelegate.swift */; };
 		03BB21032C2EA3960048BF18 /* WYWTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB21022C2EA3960048BF18 /* WYWTranslate.swift */; };
 		03C7A9F42C30280E00EFE72C /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 03C7A9F32C30280E00EFE72C /* MarkdownUI */; };
-		03C7A9F72C30287900EFE72C /* SupportsUICore in Frameworks */ = {isa = PBXBuildFile; productRef = 03C7A9F62C30287900EFE72C /* SupportsUICore */; };
 		03D39BA92BAF34410075EC3D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 03D39BA72BAF342D0075EC3D /* Localizable.xcstrings */; };
 		03DD72F62BF08AD1002DFB5D /* UpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD72F52BF08AD1002DFB5D /* UpdateView.swift */; };
 /* End PBXBuildFile section */
@@ -190,7 +189,6 @@
 				0333FBE32BE7C9DF00D7AF33 /* CepheusKeyboardKit in Frameworks */,
 				036F3C8C2B9232060080194C /* DarockKit in Frameworks */,
 				03C7A9F42C30280E00EFE72C /* MarkdownUI in Frameworks */,
-				03C7A9F72C30287900EFE72C /* SupportsUICore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +384,6 @@
 				0333FBE22BE7C9DF00D7AF33 /* CepheusKeyboardKit */,
 				030F238D2BEF9EA700E8D4FA /* SwiftyStoreKit */,
 				03C7A9F32C30280E00EFE72C /* MarkdownUI */,
-				03C7A9F62C30287900EFE72C /* SupportsUICore */,
 				032898702CAAF96E0000B06D /* Dynamic */,
 			);
 			productName = "Linecom Wear Translate Watch App";
@@ -474,7 +471,6 @@
 				0333FBE12BE7C9DF00D7AF33 /* XCRemoteSwiftPackageReference "Cepheus" */,
 				030F238C2BEF9EA700E8D4FA /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				03C7A9F22C30280E00EFE72C /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
-				03C7A9F52C30287900EFE72C /* XCRemoteSwiftPackageReference "SupportsUICore" */,
 				0328986F2CAAF96E0000B06D /* XCRemoteSwiftPackageReference "Dynamic" */,
 			);
 			productRefGroup = 03428C512B9219580025849C /* Products */;
@@ -823,7 +819,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -858,7 +854,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -1065,14 +1061,6 @@
 				minimumVersion = 2.3.1;
 			};
 		};
-		03C7A9F52C30287900EFE72C /* XCRemoteSwiftPackageReference "SupportsUICore" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Darock-Studio/SupportsUICore";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1100,11 +1088,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03C7A9F22C30280E00EFE72C /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
-		};
-		03C7A9F62C30287900EFE72C /* SupportsUICore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03C7A9F52C30287900EFE72C /* XCRemoteSwiftPackageReference "SupportsUICore" */;
-			productName = SupportsUICore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
