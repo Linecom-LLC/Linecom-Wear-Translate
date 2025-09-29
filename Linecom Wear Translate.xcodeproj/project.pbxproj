@@ -3,13 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		030F238E2BEF9EA700E8D4FA /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 030F238D2BEF9EA700E8D4FA /* SwiftyStoreKit */; };
 		030F23902BEFA17600E8D4FA /* BuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030F238F2BEFA17600E8D4FA /* BuyView.swift */; };
 		03120FC72BE285DF008D0B76 /* ExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03120FC62BE285DF008D0B76 /* ExperimentView.swift */; };
+		031C62C42CCA139200A865EC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031C62C32CCA139200A865EC /* WidgetKit.framework */; };
+		031C62C62CCA139200A865EC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031C62C52CCA139200A865EC /* SwiftUI.framework */; };
+		031C62D12CCA139300A865EC /* Tap-to-Open-LWTExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 031C62C22CCA139200A865EC /* Tap-to-Open-LWTExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		032898242CAAAEC30000B06D /* LinecomIDLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032898232CAAAEC30000B06D /* LinecomIDLoginView.swift */; };
 		032898352CAAB5740000B06D /* LinecomIDMgmtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032898342CAAB5740000B06D /* LinecomIDMgmtView.swift */; };
 		032898452CAABE380000B06D /* ExpHistoryCTL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032898442CAABE380000B06D /* ExpHistoryCTL.swift */; };
@@ -38,13 +41,32 @@
 		03A1615E2CAD8B6600E9FC90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A1615D2CAD8B6600E9FC90 /* AppDelegate.swift */; };
 		03BB21032C2EA3960048BF18 /* WYWTranslate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BB21022C2EA3960048BF18 /* WYWTranslate.swift */; };
 		03C7A9F42C30280E00EFE72C /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 03C7A9F32C30280E00EFE72C /* MarkdownUI */; };
-		03C7A9F72C30287900EFE72C /* SupportsUICore in Frameworks */ = {isa = PBXBuildFile; productRef = 03C7A9F62C30287900EFE72C /* SupportsUICore */; };
 		03D39BA92BAF34410075EC3D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 03D39BA72BAF342D0075EC3D /* Localizable.xcstrings */; };
 		03DD72F62BF08AD1002DFB5D /* UpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DD72F52BF08AD1002DFB5D /* UpdateView.swift */; };
-		03ED88E52C5086E10065C896 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 03ED88E42C5086E10065C896 /* icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		031C62CF2CCA139300A865EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03428C4A2B9219580025849C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 031C62C12CCA139200A865EC;
+			remoteInfo = "Tap-to-Open-LWTExtension";
+		};
+		031C62E92CCA1E1000A865EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03428C4A2B9219580025849C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 031C62C12CCA139200A865EC;
+			remoteInfo = "Tap-to-Open-LWTExtension";
+		};
+		031C62EB2CCA1E1300A865EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03428C4A2B9219580025849C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 031C62C12CCA139200A865EC;
+			remoteInfo = "Tap-to-Open-LWTExtension";
+		};
 		03428C732B9219590025849C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 03428C4A2B9219580025849C /* Project object */;
@@ -62,6 +84,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		031C62D22CCA139300A865EC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				031C62D12CCA139300A865EC /* Tap-to-Open-LWTExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0349B2E82C47F9F400B820B5 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -88,6 +121,9 @@
 /* Begin PBXFileReference section */
 		030F238F2BEFA17600E8D4FA /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
 		03120FC62BE285DF008D0B76 /* ExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentView.swift; sourceTree = "<group>"; };
+		031C62C22CCA139200A865EC /* Tap-to-Open-LWTExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Tap-to-Open-LWTExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		031C62C32CCA139200A865EC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		031C62C52CCA139200A865EC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		032898232CAAAEC30000B06D /* LinecomIDLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinecomIDLoginView.swift; sourceTree = "<group>"; };
 		032898342CAAB5740000B06D /* LinecomIDMgmtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinecomIDMgmtView.swift; sourceTree = "<group>"; };
 		032898442CAABE380000B06D /* ExpHistoryCTL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpHistoryCTL.swift; sourceTree = "<group>"; };
@@ -118,10 +154,32 @@
 		03BB21022C2EA3960048BF18 /* WYWTranslate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WYWTranslate.swift; sourceTree = "<group>"; };
 		03D39BA72BAF342D0075EC3D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		03DD72F52BF08AD1002DFB5D /* UpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateView.swift; sourceTree = "<group>"; };
-		03ED88E42C5086E10065C896 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		031C62D52CCA139300A865EC /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 031C62C12CCA139200A865EC /* Tap-to-Open-LWTExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		031C62C72CCA139200A865EC /* Tap-to-Open-LWT */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (031C62D52CCA139300A865EC /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "Tap-to-Open-LWT"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		031C62BF2CCA139200A865EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				031C62C62CCA139200A865EC /* SwiftUI.framework in Frameworks */,
+				031C62C42CCA139200A865EC /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03428C532B9219580025849C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -131,7 +189,6 @@
 				0333FBE32BE7C9DF00D7AF33 /* CepheusKeyboardKit in Frameworks */,
 				036F3C8C2B9232060080194C /* DarockKit in Frameworks */,
 				03C7A9F42C30280E00EFE72C /* MarkdownUI in Frameworks */,
-				03C7A9F72C30287900EFE72C /* SupportsUICore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,10 +253,10 @@
 			children = (
 				034B96072BB7CCD4005D757D /* PrivacyInfo.xcprivacy */,
 				03D39BA72BAF342D0075EC3D /* Localizable.xcstrings */,
-				03ED88E42C5086E10065C896 /* icon.png */,
 				03428C5A2B9219580025849C /* Linecom Wear Translate Watch App */,
 				03428C752B9219590025849C /* Linecom Wear Translate Watch AppUITests */,
 				0349B2D72C47F9BE00B820B5 /* Linecom Wear Translate */,
+				031C62C72CCA139200A865EC /* Tap-to-Open-LWT */,
 				03428C512B9219580025849C /* Products */,
 				0349B2E42C47F9F400B820B5 /* Frameworks */,
 			);
@@ -211,6 +268,7 @@
 				03428C562B9219580025849C /* 澪空软件腕表翻译.app */,
 				03428C722B9219590025849C /* Linecom Wear Translate Watch AppUITests.xctest */,
 				0349B2D62C47F9BE00B820B5 /* Linecom Wear Translate.app */,
+				031C62C22CCA139200A865EC /* Tap-to-Open-LWTExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -275,6 +333,8 @@
 		0349B2E42C47F9F400B820B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				031C62C32CCA139200A865EC /* WidgetKit.framework */,
+				031C62C52CCA139200A865EC /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -282,6 +342,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		031C62C12CCA139200A865EC /* Tap-to-Open-LWTExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 031C62D62CCA139300A865EC /* Build configuration list for PBXNativeTarget "Tap-to-Open-LWTExtension" */;
+			buildPhases = (
+				031C62BE2CCA139200A865EC /* Sources */,
+				031C62BF2CCA139200A865EC /* Frameworks */,
+				031C62C02CCA139200A865EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				031C62C72CCA139200A865EC /* Tap-to-Open-LWT */,
+			);
+			name = "Tap-to-Open-LWTExtension";
+			packageProductDependencies = (
+			);
+			productName = "Tap-to-Open-LWTExtension";
+			productReference = 031C62C22CCA139200A865EC /* Tap-to-Open-LWTExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		03428C552B9219580025849C /* Linecom Wear Translate Watch App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 03428C7C2B9219590025849C /* Build configuration list for PBXNativeTarget "Linecom Wear Translate Watch App" */;
@@ -289,10 +371,12 @@
 				03428C522B9219580025849C /* Sources */,
 				03428C532B9219580025849C /* Frameworks */,
 				03428C542B9219580025849C /* Resources */,
+				031C62D22CCA139300A865EC /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				031C62D02CCA139300A865EC /* PBXTargetDependency */,
 			);
 			name = "Linecom Wear Translate Watch App";
 			packageProductDependencies = (
@@ -300,7 +384,6 @@
 				0333FBE22BE7C9DF00D7AF33 /* CepheusKeyboardKit */,
 				030F238D2BEF9EA700E8D4FA /* SwiftyStoreKit */,
 				03C7A9F32C30280E00EFE72C /* MarkdownUI */,
-				03C7A9F62C30287900EFE72C /* SupportsUICore */,
 				032898702CAAF96E0000B06D /* Dynamic */,
 			);
 			productName = "Linecom Wear Translate Watch App";
@@ -339,6 +422,8 @@
 			);
 			dependencies = (
 				0349B2E72C47F9F400B820B5 /* PBXTargetDependency */,
+				031C62EA2CCA1E1000A865EC /* PBXTargetDependency */,
+				031C62EC2CCA1E1300A865EC /* PBXTargetDependency */,
 			);
 			name = "Linecom Wear Translate";
 			productName = "Linecom Wear Translate";
@@ -355,6 +440,9 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					031C62C12CCA139200A865EC = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					03428C552B9219580025849C = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -383,7 +471,6 @@
 				0333FBE12BE7C9DF00D7AF33 /* XCRemoteSwiftPackageReference "Cepheus" */,
 				030F238C2BEF9EA700E8D4FA /* XCRemoteSwiftPackageReference "SwiftyStoreKit" */,
 				03C7A9F22C30280E00EFE72C /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
-				03C7A9F52C30287900EFE72C /* XCRemoteSwiftPackageReference "SupportsUICore" */,
 				0328986F2CAAF96E0000B06D /* XCRemoteSwiftPackageReference "Dynamic" */,
 			);
 			productRefGroup = 03428C512B9219580025849C /* Products */;
@@ -393,11 +480,19 @@
 				0349B2D52C47F9BE00B820B5 /* Linecom Wear Translate */,
 				03428C552B9219580025849C /* Linecom Wear Translate Watch App */,
 				03428C712B9219590025849C /* Linecom Wear Translate Watch AppUITests */,
+				031C62C12CCA139200A865EC /* Tap-to-Open-LWTExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		031C62C02CCA139200A865EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03428C542B9219580025849C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,13 +517,19 @@
 			files = (
 				0349B2E02C47F9BF00B820B5 /* Preview Assets.xcassets in Resources */,
 				0349B2DD2C47F9BF00B820B5 /* Assets.xcassets in Resources */,
-				03ED88E52C5086E10065C896 /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		031C62BE2CCA139200A865EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		03428C522B9219580025849C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -474,6 +575,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		031C62D02CCA139300A865EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 031C62C12CCA139200A865EC /* Tap-to-Open-LWTExtension */;
+			targetProxy = 031C62CF2CCA139300A865EC /* PBXContainerItemProxy */;
+		};
+		031C62EA2CCA1E1000A865EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 031C62C12CCA139200A865EC /* Tap-to-Open-LWTExtension */;
+			targetProxy = 031C62E92CCA1E1000A865EC /* PBXContainerItemProxy */;
+		};
+		031C62EC2CCA1E1300A865EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 031C62C12CCA139200A865EC /* Tap-to-Open-LWTExtension */;
+			targetProxy = 031C62EB2CCA1E1300A865EC /* PBXContainerItemProxy */;
+		};
 		03428C742B9219590025849C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 03428C552B9219580025849C /* Linecom Wear Translate Watch App */;
@@ -487,6 +603,71 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		031C62D32CCA139300A865EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Tap-to-Open-LWT/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Tap-to-Open-LWT";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.linecom.weartranslate.watchkitapp.Tap-to-Open-LWT";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		031C62D42CCA139300A865EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B38QUJMY47;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Tap-to-Open-LWT/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Tap-to-Open-LWT";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.linecom.weartranslate.watchkitapp.Tap-to-Open-LWT";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 		03428C7A2B9219590025849C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -621,6 +802,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Linecom-Wear-Translate-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "澪软腕翻";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.linecom.weartranslate;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -629,7 +811,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate.watchkitapp;
 				PRODUCT_NAME = "澪空软件腕表翻译";
 				SDKROOT = watchos;
@@ -637,7 +819,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Debug;
 		};
@@ -654,6 +836,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Linecom-Wear-Translate-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "澪软腕翻";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.linecom.weartranslate;
 				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
@@ -662,7 +845,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate.watchkitapp;
 				PRODUCT_NAME = "澪空软件腕表翻译";
 				SDKROOT = watchos;
@@ -671,7 +854,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
 			};
 			name = Release;
 		};
@@ -727,7 +910,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Linecom-Wear-Translate-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "澪空软件腕表翻译";
+				INFOPLIST_KEY_CFBundleDisplayName = "澪软腕翻";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -740,7 +923,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -763,7 +946,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Linecom-Wear-Translate-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "澪空软件腕表翻译";
+				INFOPLIST_KEY_CFBundleDisplayName = "澪软腕翻";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -776,7 +959,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.linecom.weartranslate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -790,6 +973,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		031C62D62CCA139300A865EC /* Build configuration list for PBXNativeTarget "Tap-to-Open-LWTExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				031C62D32CCA139300A865EC /* Debug */,
+				031C62D42CCA139300A865EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		03428C4D2B9219580025849C /* Build configuration list for PBXProject "Linecom Wear Translate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -869,14 +1061,6 @@
 				minimumVersion = 2.3.1;
 			};
 		};
-		03C7A9F52C30287900EFE72C /* XCRemoteSwiftPackageReference "SupportsUICore" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Darock-Studio/SupportsUICore";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -904,11 +1088,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03C7A9F22C30280E00EFE72C /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
-		};
-		03C7A9F62C30287900EFE72C /* SupportsUICore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03C7A9F52C30287900EFE72C /* XCRemoteSwiftPackageReference "SupportsUICore" */;
-			productName = SupportsUICore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

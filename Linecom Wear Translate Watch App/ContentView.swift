@@ -423,15 +423,15 @@ struct ContentView: View {
                     refreshToken() { gotToken in
                         
                     }
-                    if !firstpresent&&accesstoken.isEmpty{
+                    if !firstpresent&&accesstoken.isEmpty {
                         isLinecomIDSuggestSheetPresent = true
                     }
                     if nowv != Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String {
                         newpresent=false
                     }
-                    if !newpresent {
-                        isWhatsNewSheetPresent = true
-                    }
+//                    if !newpresent {
+//                        isWhatsNewSheetPresent = true
+//                    }
                     
                 }
                 .sheet(isPresented: $isLinecomIDSuggestSheetPresent, onDismiss: {

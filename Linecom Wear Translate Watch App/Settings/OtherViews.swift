@@ -13,254 +13,218 @@ struct AboutView: View {
     var body: some View {
         TabView{
             AppAbout()
-            OSPView().navigationTitle("开放源代码许可")
+            OSPView()
+                .navigationTitle("开放源代码许可")
         }
     }
 }
-struct AppAbout: View{
-    @AppStorage("debugselect") var debug=false
-    @State var ICPPersent=false
-    @State var LicensePersent=false
-    @State var debugmodepst=false
-    var body: some View{
-        VStack{
-            HStack{
-                Image("abouticon").resizable().scaledToFit().mask{Circle()}
+
+struct AppAbout: View {
+    @AppStorage("debugselect") var debug = false
+    @State var ICPPersent = false
+    @State var LicensePersent = false
+    @State var debugmodepst = false
+    @State var isDebugAlertPersent = false
+    var body: some View {
+    VStack {
+        HStack {
+            Image("abouticon")
+                .resizable()
+                .scaledToFit()
+                .mask{Circle()}
                 
-                VStack{
-                    Text("澪空软件")
-                    Text("腕表翻译")
-                    if #available(watchOS 10, *){
-                        Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String).onTapGesture(count: 10, perform: {
-                            debug=true
-                            debugmodepst=true
-                        }).sheet(isPresented: $debugmodepst, content: {
-                            Text("调试选项已启用")
-                        })//.font(.custom("ccccc", size: 10))
-                    } else {
-                        Text("1.0.26")
-                    }
-                }.padding()
+            VStack {
+                Text("澪空软件")
+                Text("腕表翻译")
+                Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String).onTapGesture(count: 10, perform: {
+                            debug = true
+                            isDebugAlertPersent = true
+                    })
             }
-            if #available(watchOS 10, *){
-                Text("Developed by Linecom").padding().onTapGesture {
-                    let session = ASWebAuthenticationSession(url: URL(string: "https://www.linecom.net.cn")!, callbackURLScheme: "mlhd") { _, _ in
+                .padding()
+        }
+        
+        Text("Developed by Linecom")
+            .padding()
+            .onTapGesture {
+                    let session = ASWebAuthenticationSession(url: URL(string: "https://www.linecom.net.cn")!, callbackURLScheme: "0000") { _, _ in
                         return
                     }
                     session.prefersEphemeralWebBrowserSession = true
                     session.start()
-                }
-            } else {
-                Text("A Linecom Product")
             }
 
-            VStack{
-                if #available(watchOS 10, *){
-                    Text("Licensed under Apache License 2.0.").font(.custom("", size: 12)).sheet(isPresented: $LicensePersent, content: {
-                        LicenseView()
-                    }).onTapGesture {
-                        LicensePersent=true
-                    }
-                } else {
-                    Text("Apache License 2.0.").font(.custom("", size: 12)).sheet(isPresented: $LicensePersent, content: {
-                        LicenseView()
-                    }).onTapGesture {
-                        LicensePersent=true
-                    }
+        VStack {
+            Text("Licensed under Apache License 2.0.").font(.custom("", size: 12)).sheet(isPresented: $LicensePersent, content: {
+                    LicenseView()
+                }).onTapGesture {
+                    LicensePersent=true
                 }
-                Spacer()
-                Text("浙ICP备2024071295号-3A").font(.custom("", size: 13)).sheet(isPresented: $ICPPersent, content: {ICPView()}).onTapGesture {
-                    ICPPersent=true
-                }
-                //Text("*备案审核进行中，暂时作为PlaceHolder").font(.custom("", size: 6))
+            Spacer()
+            Text("浙ICP备2025182988号-4A")
+                .font(.custom("", size: 13)).sheet(isPresented: $ICPPersent, content: {ICPView()}).onTapGesture {
+                ICPPersent = true
             }
         }
     }
+        .alert(isPresented: $isDebugAlertPersent) {
+            Alert(title: Text(""), message: Text("调试选项已启用"), dismissButton: .default(Text("好")))
+        }
+    }
 }
-struct CerditView: View{
-    var body: some View{
-        List{
-            Section{
-                NavigationLink(destination: {LineAboutView()},label:{
-                    HStack{
+
+struct CerditView: View {
+    var body: some View {
+        List {
+            Section {
+                NavigationLink(destination: {LineAboutView()},label: {
+                    HStack {
                         Image("LINEAvatar")
                             .resizable()
                             .scaledToFit()
                             .frame(width:43,height:43)
                             .mask{Circle()}
-                        Text("澪空\n澪空软件技术\n开发者&责任人")
+                        Text("澪空\n澪空软件\n开发者&责任人")
                     }
                 })
-                
-                
-                   
             }
         }
     }
 }
-struct OSPView: View{
-    var body: some View{
-        List{
+
+struct OSPView: View {
+    var body: some View {
+        List {
             Button(action: {
-                let session = ASWebAuthenticationSession(url: URL(string: "https://github.com/SwiftyJSON/SwiftyJSON")!, callbackURLScheme: "mlhd") { _, _ in
+                let session = ASWebAuthenticationSession(url: URL(string: "https://github.com/SwiftyJSON/SwiftyJSON")!, callbackURLScheme: "0000") { _, _ in
                     return
                 }
                 session.prefersEphemeralWebBrowserSession = true
                 session.start()
             }, label:{Text("SwiftyJSON\nLicensed under MIT")})
+            
             Button(action: {
-                let session = ASWebAuthenticationSession(url: URL(string: "https://github.com/Alamofire/Alamofire")!, callbackURLScheme: "mlhd") { _, _ in
+                let session = ASWebAuthenticationSession(url: URL(string: "https://github.com/Alamofire/Alamofire")!, callbackURLScheme: "0000") { _, _ in
                     return
                 }
                 session.prefersEphemeralWebBrowserSession = true
                 session.start()
             }, label:{Text("Alamofire\nLicensed under MIT")})
+            
             Text("SFSymbol\nLicensed under MIT")
-            Text("Darockkit\nLicensed under none")
         }
     }
 }
-struct SettingsView: View{
-    @AppStorage("debugselect") var debugdisplay=false
-    @AppStorage("Provider") var provider="baidu"
-    @AppStorage("debugmode") var debugmode=false
-    @State var pname=""
-    @State var price=""
-    @AppStorage("CepheusEnable") var cepenable=false
-    @AppStorage("ExtraBuyed") var buyed=false
+
+struct SettingsView: View {
+    @AppStorage("debugselect") var debugdisplay = false
+    @AppStorage("Provider") var provider = "baidu"
+    @AppStorage("debugmode") var debugmode = false
+    @AppStorage("CepheusEnable") var cepenable = false
     @AppStorage("IDAccessToken") var accesstoken = ""
     @AppStorage("IDidToken") var idtoken = ""
     @AppStorage("IDName") var idname = ""
     @AppStorage("IDEmail") var idemail = ""
-    @AppStorage("recordHistory") var historyenable=true
-    @AppStorage("DisplayHistoryEnrty") var displayhistoryenable=true
-    var body: some View{
-        List{
-            //if !buyed{
-            //    Section{
-            //        NavigationLink(destination: {BuyView()}, label: {Text("购买额外提供商")})
-            //    }
-            //}
-            if #available(watchOS 10.0, *) {
-                Section {
-                    if accesstoken.isEmpty{
-                        NavigationLink(destination: {LinecomIDLoginView().navigationTitle("登录 Linecom ID")}, label: {
-                            HStack {
-                                Image(systemName: "person.crop.circle")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .foregroundColor(.blue)
-                                    .padding()
-                                    .frame(width: 50)
-                                Text("登录 Linecom ID")
-                                    .font(.caption2)
+    @AppStorage("recordHistory") var historyenable = true
+    @AppStorage("DisplayHistoryEnrty") var displayhistoryenable = true
+    var body: some View {
+        List {
+            Section {
+                if accesstoken.isEmpty{
+                    NavigationLink(destination: {LinecomIDLoginView().navigationTitle("登录 Linecom ID")}, label: {
+                        HStack {
+                            Image(systemName: "person.crop.circle")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.blue)
+                                .padding()
+                                .frame(width: 50)
+                            Text("登录 Linecom ID")
+                                .font(.caption2)
+                        }
+                    })
+                } else {
+                    NavigationLink(destination: {LinecomIDMgmtView().navigationTitle("Linecom ID")}, label: {
+                        HStack {
+                            Image(systemName: "person.crop.circle")
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.blue)
+                                .padding()
+                                .frame(width: 50)
+                            VStack {
+                                Text("\(idname)")
+                                    .font(.caption)
+                                Text("\(idemail)")
+                                    .font(.custom(" ", size: 12))
+                                    .foregroundColor(.gray)
+                                    .lineLimit(1)
                             }
-                        })
-                    } else {
-                        NavigationLink(destination: {LinecomIDMgmtView().navigationTitle("Linecom ID")}, label: {
-                            HStack {
-                                Image(systemName: "person.crop.circle")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .foregroundColor(.blue)
-                                    .padding()
-                                    .frame(width: 50)
-                                VStack {
-                                    Text("\(idname)")
-                                        .font(.caption)
-                                    Text("\(idemail)")
-                                        .font(.custom(" ", size: 12))
-                                        .foregroundColor(.gray)
-                                        .lineLimit(1)
-                                }
-                            }
-                        })
-                    }
+                        }
+                    })
                 }
             }
             
-            Section{
-                Picker("翻译提供商", selection: $provider){
-                    Section{
-                        Text("百度翻译").tag("baidu")
-                        Text("腾讯云TC-TMT").tag("tencent")
-                        if #available(watchOS 10, *) {
-                            Text("阿里云ACS-MT").tag("ali")
-                        }
-                    } header: {
-                        Text("基本").bold()
-                    }
-                    if buyed{
-                        Section{
-                            Text("Google").tag("google")
-                            //Text("Bing").tag("bing")
-                        } header: {
-                            Text("额外").bold()
-                        }
+            Section {
+                Picker("翻译提供商", selection: $provider) {
+                    Section {
+                        Text("百度翻译")
+                            .tag("baidu")
+                        Text("腾讯云TC-TMT")
+                            .tag("tencent")
+                        Text("阿里云ACS-MT")
+                            .tag("ali")
                     }
                 }
-                if #available(watchOS 10.0, *){
-                    Toggle("记录历史", isOn: $historyenable)
-                }
+                Toggle("记录历史", isOn: $historyenable)
                 
-            } header:{
+            } header: {
                 Text("翻译")
             }
-            Section(content:{
-                if #available(watchOS 10.0, *){
-                    Toggle("启用兼容性输入",isOn: $cepenable)
-                } else {
-                    Toggle("启用兼容性输入",isOn: $cepenable).disabled(true).foregroundColor(.gray)
-                }
+            
+            Section(content: {
+                Toggle("启用兼容性输入",isOn: $cepenable)
                     
-                },header: {
-                    Text("通用")},footer: {
-                        if #available(watchOS 10, *){
-                            Text("为Apple Watch SE和Apple Watch Series6及以前的设备提供英文与拼音的全键盘输入。\nPowered by Cepheus")
-                        } else {
-                            Text("watchOS 9不支持此功能")
-                        }
+            }, header: {
+                Text("通用")},footer: {
+                        Text("为Apple Watch SE和Apple Watch Series6及以前的设备提供英文与拼音的全键盘输入。\nPowered by Cepheus")
+            })
+            
+            NavigationLink(destination: {
+                SupportView()
+                    .navigationTitle("联系我们")
+            },label: {
+                Image(systemName: "envelope.open.fill")
+                Text("联系与反馈")
+            })
+            Section {
+//                    NavigationLink(destination: {WhatsNewView()}, label: {
+//                        HStack{
+//                            Image(systemName: "sparkles")
+//                            Text("更新聚焦")
+//                        }
+//                    })
+                NavigationLink(destination: {
+                    UpdateView()
+                        .navigationTitle("软件更新")
+                }, label: {
+                    HStack {
+                        Image(systemName: "gear.badge")
+                        Text("软件更新")
+                    }
                 })
-            if #available(watchOS 10, *){
-                NavigationLink(destination:{SupportView().navigationTitle("联系我们")},label:{Image(systemName: "envelope.open.fill");Text("联系与反馈")})
-            } else {
-                Section(content:{NavigationLink(destination:{SupportView().navigationTitle("联系我们")},label:{Image(systemName: "envelope.open.fill");Text("联系与反馈")}).disabled(true).foregroundColor(.gray)},footer: {
-                    Text("对于watchOS 9的支持已经结束")
+                NavigationLink(destination: {
+                    AboutView()
+                        .navigationTitle("关于LWT")
+                        .containerBackground(Color(hue: 141/360, saturation: 60/100, brightness: 100/100).gradient, for: .navigation)
+                },label: {
+                    HStack {
+                        Image(systemName: "info.circle")
+                        Text("关于")
+                    }
                 })
-            }
-            if #available(watchOS 10, *){
-                Section{
-                    NavigationLink(destination: {WhatsNewView()}, label: {
-                        HStack{
-                            Image(systemName: "sparkles")
-                            Text("更新聚焦")
-                        }
-                    })
-                    NavigationLink(destination: {UpdateView().navigationTitle("软件更新")}, label: {
-                        HStack{
-                            Image(systemName: "gear.badge")
-                            Text("软件更新")
-                        }
-                        
-                    })
-                        NavigationLink(destination:{AboutView().navigationTitle("关于LWT").containerBackground(Color(hue: 141/360, saturation: 60/100, brightness: 100/100).gradient, for: .navigation)},label:{HStack{Image(systemName: "info.circle")
-                            Text("关于")
-                        }})
-                } header:{
-                    Text("App")
-                }
-            } else{
-                Section{
-                    NavigationLink(destination: {UpdateView().navigationTitle("软件更新")}, label: {
-                        HStack{
-                            Image(systemName: "gear.badge")
-                            Text("软件更新")
-                        }
-                        
-                    }).disabled(true).foregroundColor(.gray)
-                } footer:{
-                    Text("对于watchOS 9的支持已经结束")
-                }
+            } header: {
+                Text("App")
             }
             
             //搁置
@@ -269,17 +233,19 @@ struct SettingsView: View{
             //}footer:{
             //       Text("打开此选项，LWT将会记住您上次所用的语言。")
             //    }
-            if debugdisplay{
-                Section{
+            if debugdisplay {
+                Section {
                     Toggle("调试模式",isOn: $debugmode)
-                    Button("重设购买状态",action: {
-                        buyed=false
+                    NavigationLink(destination: {
+                        ExperimentView()
+                            .navigationTitle("实验性功能")
+                    }, label: {
+                        Text("实验性功能")
                     })
-                    NavigationLink(destination: {ExperimentView().navigationTitle("实验性功能")}, label: {Text("实验性功能")})
-                    Button(action:{
-                        debugdisplay=false
-                        debugmode=false
-                    },label: {
+                    Button(action: {
+                        debugdisplay = false
+                        debugmode = false
+                    }, label: {
                         Text("隐藏调试选项")
                     })
                 } header: {
@@ -293,14 +259,14 @@ struct SettingsView: View{
 }
 
 struct SupportView: View{
-    @State var contactmethod="linecom"
-    var body: some View{
-        NavigationStack{
-            List{
-                if contactmethod=="linecom"{
-                    Section{
+    @State var contactmethod = "linecom"
+    var body: some View {
+        NavigationStack {
+            List {
+                if contactmethod=="linecom" {
+                    Section {
                         Button(action: {
-                            let session = ASWebAuthenticationSession(url: URL(string: "https://lkurl.top/support")!, callbackURLScheme: "mlhd") { _, _ in
+                            let session = ASWebAuthenticationSession(url: URL(string: "https://lkurl.top/support")!, callbackURLScheme: "0000") { _, _ in
                                 return
                             }
                             session.prefersEphemeralWebBrowserSession = true
@@ -309,41 +275,31 @@ struct SupportView: View{
                             Text("前往Linecom支持中心")
                         })
                     }
-                } else if contactmethod=="transferdarock"{
-                    
                 }
             }
         }
     }
 }
-struct LineAboutView: View{
-    var body: some View{
-        if #available(watchOS 10.0, *) {
-            TabView{
-                LineInfoView()
-                LineContactView()
-            }
-            .tabViewStyle(.verticalPage)
-        } else {
-            // Fallback on earlier versions
-            ScrollView{
-                LineInfoView()
-                LineContactView()
-            }
-            
+
+struct LineAboutView: View {
+    var body: some View {
+        TabView {
+            LineInfoView()
+            LineContactView()
         }
-        
+            .tabViewStyle(.verticalPage)
     }
-    struct LineInfoView: View{
-        var body: some View{
-            VStack{
-                HStack{
+    
+    struct LineInfoView: View {
+        var body: some View {
+            VStack {
+                HStack {
                     Spacer()
                     Image("LINEAvatar")
                         .resizable()
                         .scaledToFit()
                         .mask{Circle()}
-                    .frame(width:100, height:100)
+                        .frame(width:100, height:100)
                     Spacer()
                 }
                 Text("澪空Linecom")
@@ -353,44 +309,43 @@ struct LineAboutView: View{
             }
         }
     }
-    struct LineContactView: View{
-        var body: some View{
-            List{
-                VStack{
-                    HStack{
+    struct LineContactView: View {
+        var body: some View {
+            List {
+                VStack {
+                    HStack {
                         Image(systemName: "paperplane")
                         Text("澪空软件技术")
                     }
-                    HStack{
+                    HStack {
                         Image(systemName: "info.circle")
                         Text("负责人")
                     }
-                    HStack{
+                    HStack {
                         Image(systemName: "apple.terminal")
                         Text("程序开发")
                     }
-                    HStack{
+                    HStack {
                         Image(systemName: "envelope")
-                        Text("linecom@linecom.net.cn").font(.custom("cust", size: 13))
+                        Text("linecom@linecom.net.cn")
+                            .font(.custom("cust", size: 13))
                     }
                 }
             }
         }
     }
-    
 }
 
-
-
-struct ICPView: View{
-    var body: some View{
-        NavigationStack{
-            List{
+struct ICPView: View {
+    var body: some View {
+        NavigationStack {
+            List {
                 NavigationLink(destination: {ICPInfoView()}, label: {
-                    Text("浙ICP备2024071295号-3A").font(.custom("cstom", size: 14))
+                    Text("浙ICP备2025182988号-4A")
+                        .font(.custom("cstom", size: 14))
                 })
                 Button(action: {
-                    let session = ASWebAuthenticationSession(url: URL(string: "https://beian.miit.gov.cn")!, callbackURLScheme: "mlhd") { _, _ in
+                    let session = ASWebAuthenticationSession(url: URL(string: "https://beian.miit.gov.cn")!, callbackURLScheme: "0000") { _, _ in
                         return
                     }
                     session.prefersEphemeralWebBrowserSession = true
@@ -401,46 +356,48 @@ struct ICPView: View{
                         Text("MIIT网站")
                     }
                 })
-            }.navigationTitle("ICP备案")
+            }
+            .navigationTitle("ICP备案")
         }
     }
 }
-struct ICPInfoView: View{
-    var body: some View{
-        List{
+
+struct ICPInfoView: View {
+    var body: some View {
+        List {
             Text("ICP备案主体信息")
-            Section{
-                Text("宁波高新区程信通讯器材经营部")
+            Section {
+                Text("宁波市鄞州东柳澪空软件服务部（个体工商户）")
             } header: {
                 Text("主办单位名称")
             }
-            Section{
-                Text("浙ICP备2024071295号")
+            Section {
+                Text("浙ICP备2025182988号")
             } header: {
                 Text("ICP备案/许可证号")
             }
-            Section{
+            Section {
                 Text("企业")
             } header: {
                 Text("主办单位性质")
             }
-            Section{
-                Text("2024-03-12 08:44:27")
+            Section {
+                Text("2024-07-28")
             } header: {
                 Text("审核通过日期")
             }
             Text("ICP备案服务信息")
-            Section{
+            Section {
                 Text("澪空软件腕表翻译")
             } header: {
                 Text("服务名称")
             }
-            Section{
-                Text("浙ICP备2024071295号-3A")
+            Section {
+                Text("浙ICP备2025182988号-4A")
             } header: {
                 Text("ICP备案/许可证号")
             }
-            Section{
+            Section {
                 Text("")
             } header: {
                 Text("服务前置审批项")
@@ -448,9 +405,10 @@ struct ICPInfoView: View{
         }
     }
 }
-struct LicenseView: View{
-    var body: some View{
-        ScrollView{
+
+struct LicenseView: View {
+    var body: some View {
+        ScrollView {
             Text("""
     Apache License
 Version 2.0, January 2004
@@ -655,16 +613,13 @@ http://www.apache.org/licenses/
    limitations under the License.
 """
             )
-        }.navigationTitle("License")
+        }
+        .navigationTitle("License")
     }
 }
 
 #Preview {
-    NavigationStack{
-        
-            
-            SettingsView()
-            
-        
+    NavigationStack {
+        SettingsView()
     }
 }

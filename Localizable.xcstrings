@@ -85,6 +85,7 @@
       }
     },
     "Darockkit\nLicensed under none" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -861,6 +862,9 @@
         }
       }
     },
+    "好" : {
+
+    },
     "如已购买，请再次点击以确认" : {
 
     },
@@ -1231,9 +1235,6 @@
       }
     },
     "更为 watchOS 打造的焕然一新的用户界面。" : {
-
-    },
-    "更新聚焦" : {
 
     },
     "有软件更新可用" : {
