@@ -21,6 +21,9 @@ struct WYWTranslate: View {
         @State var wywout=""
         @State var req=false
         @AppStorage("CepheusEnable") var cepenable=false
+        @AppStorage("IsSubscribed") var isSubscribed = false
+        @State var isSubscriptionPromptPresent = false
+        @State var isSubscriptionAlertPresent = false
         var body: some View {
             List{
                 Section{
@@ -37,6 +40,11 @@ struct WYWTranslate: View {
                         CepheusKeyboard(input: $wywin,prompt:"键入文言",defaultLanguage: "zh-hans-pinyin")
                     }
                     Button(action: {
+                        if !isSubscribed {
+                            isSubscriptionAlertPresent = true
+                            return
+                        }
+
                         req=true
                         if !wywin.isEmpty{
                             DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/lwt/translate?provider=baidu&text=\(wywin)&slang=wyw&tlang=zh&pass=l1nec0m".urlEncoded()){
@@ -80,6 +88,17 @@ struct WYWTranslate: View {
                     }
                 }
                 
+            }
+            .sheet(isPresented: $isSubscriptionPromptPresent) {
+                SubscriptionView()
+            }
+            .alert("需要订阅", isPresented: $isSubscriptionAlertPresent) {
+                Button("去订阅") {
+                    isSubscriptionPromptPresent = true
+                }
+                Button("取消", role: .cancel) {}
+            } message: {
+                Text("只有订阅用户可以请求翻译。")
             }
         }
     }

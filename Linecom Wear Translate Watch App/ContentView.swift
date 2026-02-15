@@ -51,6 +51,9 @@ struct ContentView: View {
     @State var transfl=""
     @State var notice=""
     @AppStorage("recordHistory") var enableHistory = true
+    @AppStorage("IsSubscribed") var isSubscribed = false
+    @State var isSubscriptionPromptPresent = false
+    @State var isSubscriptionAlertPresent = false
     @State var latest=""
     @AppStorage("HomeTipUpdate") var homeTipUpdate = true
     var body: some View {
@@ -236,7 +239,11 @@ struct ContentView: View {
                         Spacer()
                         if NetPing == "ok"||debugenable{
                             Button(action: {
-                                // ...
+                                if !isSubscribed {
+                                    isSubscriptionAlertPresent = true
+                                    return
+                                }
+
                                 requesting = true
                                 if slang.isEmpty && !debugenable{
                                     translatedText="请输入文本"
@@ -374,6 +381,9 @@ struct ContentView: View {
                 }, content: {
                     WhatsNewView()
                 })
+                .sheet(isPresented: $isSubscriptionPromptPresent) {
+                    SubscriptionView()
+                }
                 .alert(isPresented: $isUpdateTipAlertPresent, content: {
                     Alert(title: Text("LWT 有更新可用"), message: Text("LWT 版本 \(latest) 已就绪，请前往 App Store 更新"), primaryButton: .cancel(Text("稍后提醒"), action: {
                         if updateTipTimes == 13 {
@@ -383,6 +393,14 @@ struct ContentView: View {
                         UpdateView()
                     }))
                 })
+                .alert("需要订阅", isPresented: $isSubscriptionAlertPresent) {
+                    Button("去订阅") {
+                        isSubscriptionPromptPresent = true
+                    }
+                    Button("取消", role: .cancel) {}
+                } message: {
+                    Text("只有订阅用户可以请求翻译。")
+                }
         }
     }
     @ViewBuilder
