@@ -43,9 +43,14 @@ struct ContentView: View {
     @State var isUpdateTipAlertPresent = false
     @AppStorage("UpdateTipedTimes") var updateTipTimes = 0
     @AppStorage("NowVersion") var nowv = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-    @State var baidugroup=["zh":"简体中文","cht":"繁体中文","en":"英语","jp":"日语","kor":"韩语","fra":"法语","ru":"俄语","de":"德语","spa":"西班牙语","bl":"波兰语"]
-    @State var tencentgroup=["zh":"简体中文","zh-TW":"繁体中文","en":"英语","ja":"日语","ko":"韩语","fr":"法语","ru":"俄语","de":"德语","es":"西班牙语"]
-    @State var aligroup=["zh":"简体中文","zh-tw":"繁体中文","en":"英语","ja":"日语","ko":"韩语","fr":"法语","ru":"俄语","de":"德语","es":"西班牙语"]
+    private let baidugroup=["zh":"简体中文","cht":"繁体中文","en":"英语","jp":"日语","kor":"韩语","fra":"法语","ru":"俄语","de":"德语","spa":"西班牙语","bl":"波兰语"]
+    private let tencentgroup=["zh":"简体中文","zh-TW":"繁体中文","en":"英语","ja":"日语","ko":"韩语","fr":"法语","ru":"俄语","de":"德语","es":"西班牙语"]
+    private let aligroup=["zh":"简体中文","zh-tw":"繁体中文","en":"英语","ja":"日语","ko":"韩语","fr":"法语","ru":"俄语","de":"德语","es":"西班牙语"]
+    private let languageOptions: [String: [(code: String, name: String)]] = [
+        "baidu": [("zh", "简体中文"), ("cht", "繁体中文"), ("en", "英语"), ("jp", "日语"), ("kor", "韩语"), ("fra", "法语"), ("de", "德语"), ("ru", "俄语"), ("spa", "西班牙语"), ("bl", "波兰语")],
+        "tencent": [("zh", "简体中文"), ("zh-TW", "繁体中文"), ("en", "英语"), ("ja", "日语"), ("ko", "韩语"), ("fr", "法语"), ("de", "德语"), ("ru", "俄语"), ("es", "西班牙语")],
+        "ali": [("zh", "简体中文"), ("zh-tw", "繁体中文"), ("en", "英语"), ("ja", "日语"), ("ko", "韩语"), ("fr", "法语"), ("de", "德语"), ("ru", "俄语"), ("es", "西班牙语")]
+    ]
     @State var transfl=""
     @State var notice=""
     @AppStorage("recordHistory") var enableHistory = true
@@ -162,81 +167,11 @@ struct ContentView: View {
                         
                         Section {
                             Picker("源语言",selection: $sourcelang) {
-                                if provider=="baidu"{
-                                    Text("自动").tag("auto")
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("cht")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("jp")
-                                    Text("韩语").tag("kor")
-                                    Text("法语").tag("fra")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("spa")
-                                    Text("波兰语").tag("bl")
-                                } else if provider=="tencent"{
-                                    Text("自动").tag("auto")
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("zh-TW")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("ja")
-                                    Text("韩语").tag("ko")
-                                    Text("法语").tag("fr")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("es")
-                                } else if provider=="ali"{
-                                    Text("自动").tag("auto")
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("zh-tw")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("ja")
-                                    Text("韩语").tag("ko")
-                                    Text("法语").tag("fr")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("es")
-                                }
-                                
+                                languagePickerOptions(includeAuto: true)
                             }
                             
                             Picker("目标语言",selection: $targetlang) {
-                                //debug selection!
-                                if debugenable{
-                                    Text("自动").tag("auto")
-                                }
-                                if provider=="baidu"{
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("cht")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("jp")
-                                    Text("韩语").tag("kor")
-                                    Text("法语").tag("fra")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("spa")
-                                    Text("波兰语").tag("bl")
-                                } else if provider=="tencent"{
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("zh-TW")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("ja")
-                                    Text("韩语").tag("ko")
-                                    Text("法语").tag("fr")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("es")
-                                } else if provider=="ali"{
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("zh-tw")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("ja")
-                                    Text("韩语").tag("ko")
-                                    Text("法语").tag("fr")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("es")
-                                }
+                                languagePickerOptions(includeAuto: debugenable)
                             }
                             if !cepenable{
                                 if slang.isEmpty{
@@ -539,60 +474,11 @@ struct ContentView: View {
                         
                         Section {
                             Picker("源语言",selection: $sourcelang) {
-                                if provider=="baidu"{
-                                    Text("自动").tag("auto")
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("cht")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("jp")
-                                    Text("韩语").tag("kor")
-                                    Text("法语").tag("fra")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("spa")
-                                    Text("波兰语").tag("bl")
-                                } else if provider=="tencent"{
-                                    Text("自动").tag("auto")
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("zh-TW")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("ja")
-                                    Text("韩语").tag("ko")
-                                    Text("法语").tag("fr")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("es")
-                                }
-                                
+                                languagePickerOptions(includeAuto: true)
                             }
                             
                             Picker("目标语言",selection: $targetlang) {
-                                //debug selection!
-                                if debugenable{
-                                    Text("自动").tag("auto")
-                                }
-                                if provider=="baidu"{
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("cht")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("jp")
-                                    Text("韩语").tag("kor")
-                                    Text("法语").tag("fra")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("spa")
-                                    Text("波兰语").tag("bl")
-                                } else if provider=="tencent"{
-                                    Text("简体中文").tag("zh")
-                                    Text("繁体中文").tag("zh-TW")
-                                    Text("英语").tag("en")
-                                    Text("日语").tag("ja")
-                                    Text("韩语").tag("ko")
-                                    Text("法语").tag("fr")
-                                    Text("德语").tag("de")
-                                    Text("俄语").tag("ru")
-                                    Text("西班牙语").tag("es")
-                                }
+                                languagePickerOptions(includeAuto: debugenable)
                             }
                             if !cepenable{
                                 TextField("键入源语言",text: $slang)
@@ -725,6 +611,19 @@ struct ContentView: View {
             }
         }
     }
+    @ViewBuilder
+    private func languagePickerOptions(includeAuto: Bool) -> some View {
+        if includeAuto {
+            Text("自动").tag("auto")
+        }
+
+        if let options = languageOptions[provider] {
+            ForEach(options, id: \.code) { option in
+                Text(option.name).tag(option.code)
+            }
+        }
+    }
+
     func refreshToken(completion: @escaping (String?) -> Void) {
                 
         var request = URLRequest(url: URL(string: "https://idmsa.cn/realms/idpub/protocol/openid-connect/token")!)
@@ -770,4 +669,3 @@ struct TokenResponse: Codable {
 #Preview {
     ContentView()
 }
-
