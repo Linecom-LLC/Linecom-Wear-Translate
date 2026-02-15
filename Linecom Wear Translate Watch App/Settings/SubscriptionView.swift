@@ -4,8 +4,27 @@ import SwiftyStoreKit
 struct SubscriptionConfig {
     static let productIds: Set<String> = [
         "com.linecom.weartranslate.v2Basic.Monthly",
+        "com.linecom.weartranslate.v2Basic.Yearly",
+        "com.linecom.weartranslate.v2Pro.Monthly",
+        "com.linecom.weartranslate.v2Pro.Yearly"
+    ]
+    static let basicProductIds: Set<String> = [
+        "com.linecom.weartranslate.v2Basic.Monthly",
         "com.linecom.weartranslate.v2Basic.Yearly"
     ]
+    static let proProductIds: Set<String> = [
+        "com.linecom.weartranslate.v2Pro.Monthly",
+        "com.linecom.weartranslate.v2Pro.Yearly"
+    ]
+
+    static func isBasic(_ productId: String) -> Bool {
+        basicProductIds.contains(productId)
+    }
+
+    static func isPro(_ productId: String) -> Bool {
+        proProductIds.contains(productId)
+    }
+
     static let manageSubscriptionsURL = URL(string: "https://apps.apple.com/account/subscriptions")!
 }
 
@@ -132,6 +151,18 @@ struct SubscriptionView: View {
     @StateObject private var store = SubscriptionStore()
     @Environment(\.openURL) private var openURL
 
+    private var availableProducts: [SubscriptionProduct] {
+        if !store.isSubscribed {
+            return store.products
+        }
+
+        if SubscriptionConfig.isBasic(store.subscribedProductId) {
+            return store.products.filter { SubscriptionConfig.isPro($0.id) }
+        }
+
+        return []
+    }
+
     var body: some View {
         List {
             Section {
@@ -157,12 +188,14 @@ struct SubscriptionView: View {
                 } footer: {
                     Text("将打开 App Store 订阅管理页面")
                 }
-            } else {
+            }
+
+            if store.isLoading || !availableProducts.isEmpty {
                 Section {
                     if store.isLoading {
                         ProgressView("正在加载订阅项目")
                     } else {
-                        ForEach(store.products) { product in
+                        ForEach(availableProducts) { product in
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(product.title)
                                 Text(product.description)
@@ -181,7 +214,7 @@ struct SubscriptionView: View {
                         }
                     }
                 } header: {
-                    Text("可用订阅")
+                    Text(store.isSubscribed ? "升级到 Pro" : "可用订阅")
                 }
             }
 
@@ -208,7 +241,7 @@ struct SubscriptionView: View {
         }
         .onAppear {
             store.syncStatusFromStorage()
-            if !store.isSubscribed {
+            if !store.isSubscribed || SubscriptionConfig.isBasic(store.subscribedProductId) {
                 store.load()
             }
         }
