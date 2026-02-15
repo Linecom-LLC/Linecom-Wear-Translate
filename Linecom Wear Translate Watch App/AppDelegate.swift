@@ -9,28 +9,31 @@
 import WatchKit
 import PushKit
 
-class AppDelegate: NSObject, WKExtensionDelegate, PKPushRegistryDelegate {
+final class AppDelegate: NSObject, WKExtensionDelegate, PKPushRegistryDelegate {
 
-    var pushRegistry: PKPushRegistry!
+    private var pushRegistry: PKPushRegistry?
 
     func applicationDidFinishLaunching() {
         // 初始化 PushKit 并注册推送类型
         setupPushKit()
     }
 
-    func setupPushKit() {
+    private func setupPushKit() {
         // 创建 PKPushRegistry 实例并设置其代理
-        pushRegistry = PKPushRegistry(queue: DispatchQueue.main)
-        pushRegistry.delegate = self
-        
+        let registry = PKPushRegistry(queue: DispatchQueue.main)
+        registry.delegate = self
+
         // 注册 VoIP 推送类型（也可以根据需求注册其他类型）
-        pushRegistry.desiredPushTypes = [.voIP]
+        registry.desiredPushTypes = [.voIP]
+        pushRegistry = registry
     }
 
     // MARK: - PKPushRegistryDelegate
 
     // 当设备成功注册推送时会调用此方法，并返回推送凭证
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
+        guard type == .voIP else { return }
+
         // 将推送凭证发送到服务器
         let token = pushCredentials.token.map { String(format: "%02x", $0) }.joined()
         print("PushKit Token: \(token)")

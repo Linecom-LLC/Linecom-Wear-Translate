@@ -8,16 +8,13 @@
 import SwiftUI
 import DarockKit
 import AuthenticationServices
-import Dynamic
-import UIKit
-import WatchKit
 
 struct UpdateView: View {
-    @State var reqing=true
-    @State var latest=""
-    @State var success=true
+    @State private var reqing = true
+    @State private var latest = ""
+    @State private var success = true
     @AppStorage("HomeTipUpdate") var homeTipUpdate = true
-    @State var nowv=Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+    private let nowv = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
     var body: some View {
         ScrollView{
             VStack{
@@ -62,13 +59,7 @@ struct UpdateView: View {
                         Divider()
                         Text("请前往App Store更新")
                         //List{
-                            Button(action: {
-                                let session = ASWebAuthenticationSession(url: URL(string: "https://api.linecom.net.cn/lwt/update?action=go")!, callbackURLScheme: "mlhd") { _, _ in
-                                    return
-                                }
-                                session.prefersEphemeralWebBrowserSession = true
-                                session.start()
-                            }, label:{
+                            Button(action: openUpdatePage, label:{
                                 HStack{
                                     Image(systemName: "applewatch.and.arrow.forward")
                                     Text("打开App Store")
@@ -79,16 +70,24 @@ struct UpdateView: View {
                         Text("LWT已是最新版本")
                     }
                 }
-            }.onAppear(){
+            }.onAppear {
             DarockKit.Network.shared.requestJSON("https://api.linecom.net.cn/lwt/update?action=query"){ resp, succeed in
-                if !succeed{
-                    reqing=false
-                    success=false
+                if !succeed {
+                    success = false
+                    reqing = false
+                    return
                 }
-                reqing=false
-                latest=resp["message"].string ?? ""
+
+                latest = resp["message"].string ?? ""
+                reqing = false
             }
         }
+    }
+
+    private func openUpdatePage() {
+        let session = ASWebAuthenticationSession(url: URL(string: "https://api.linecom.net.cn/lwt/update?action=go")!, callbackURLScheme: "mlhd") { _, _ in }
+        session.prefersEphemeralWebBrowserSession = true
+        session.start()
     }
 }
 

@@ -9,10 +9,7 @@ import SwiftUI
 import DarockKit
 //import CommonCrypto
 import CepheusKeyboardKit
-import AuthenticationServices
 //import SwiftyStoreKit
-import UIKit
-import Dynamic
 
 
 struct ContentView: View {
