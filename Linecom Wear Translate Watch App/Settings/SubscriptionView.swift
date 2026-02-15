@@ -28,6 +28,47 @@ struct SubscriptionConfig {
     static let manageSubscriptionsURL = URL(string: "https://apps.apple.com/account/subscriptions")!
 }
 
+
+enum SubscriptionTier {
+    case none
+    case basic
+    case pro
+}
+
+struct ProviderAccessHelper {
+    static func currentTier(productId: String) -> SubscriptionTier {
+        if SubscriptionConfig.isPro(productId) {
+            return .pro
+        }
+        if SubscriptionConfig.isBasic(productId) {
+            return .basic
+        }
+        return .none
+    }
+
+    static func allowedProviders(productId: String) -> Set<String> {
+        switch currentTier(productId: productId) {
+        case .none:
+            return ["baidu"]
+        case .basic:
+            return ["baidu", "tencent", "ali"]
+        case .pro:
+            return ["baidu", "tencent", "ali", "deepl"]
+        }
+    }
+
+    static func isProviderAllowed(provider: String, productId: String) -> Bool {
+        allowedProviders(productId: productId).contains(provider)
+    }
+
+    static func normalizedProvider(currentProvider: String, productId: String) -> String {
+        if isProviderAllowed(provider: currentProvider, productId: productId) {
+            return currentProvider
+        }
+        return "baidu"
+    }
+}
+
 struct SubscriptionProduct: Identifiable {
     let id: String
     let title: String

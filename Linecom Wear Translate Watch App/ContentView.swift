@@ -46,7 +46,8 @@ struct ContentView: View {
     private let languageOptions: [String: [(code: String, name: String)]] = [
         "baidu": [("zh", "简体中文"), ("cht", "繁体中文"), ("en", "英语"), ("jp", "日语"), ("kor", "韩语"), ("fra", "法语"), ("de", "德语"), ("ru", "俄语"), ("spa", "西班牙语"), ("bl", "波兰语")],
         "tencent": [("zh", "简体中文"), ("zh-TW", "繁体中文"), ("en", "英语"), ("ja", "日语"), ("ko", "韩语"), ("fr", "法语"), ("de", "德语"), ("ru", "俄语"), ("es", "西班牙语")],
-        "ali": [("zh", "简体中文"), ("zh-tw", "繁体中文"), ("en", "英语"), ("ja", "日语"), ("ko", "韩语"), ("fr", "法语"), ("de", "德语"), ("ru", "俄语"), ("es", "西班牙语")]
+        "ali": [("zh", "简体中文"), ("zh-tw", "繁体中文"), ("en", "英语"), ("ja", "日语"), ("ko", "韩语"), ("fr", "法语"), ("de", "德语"), ("ru", "俄语"), ("es", "西班牙语")],
+        "deepl": []
     ]
     @State var transfl=""
     @State var notice=""
@@ -54,6 +55,7 @@ struct ContentView: View {
     @AppStorage("SubscriptionProductId") var subscriptionProductId = ""
     @State var isSubscriptionPromptPresent = false
     @State var isSubscriptionAlertPresent = false
+    @State var isProviderUpgradeAlertPresent = false
     @State var latest=""
     @AppStorage("HomeTipUpdate") var homeTipUpdate = true
     var body: some View {
@@ -243,6 +245,10 @@ struct ContentView: View {
                                     isSubscriptionAlertPresent = true
                                     return
                                 }
+                                if !ProviderAccessHelper.isProviderAllowed(provider: provider, productId: subscriptionProductId) {
+                                    isProviderUpgradeAlertPresent = true
+                                    return
+                                }
 
                                 requesting = true
                                 if slang.isEmpty && !debugenable{
@@ -301,6 +307,10 @@ struct ContentView: View {
                                         }
                                         requesting=false
                                     }
+                                }
+                                else if provider=="deepl"{
+                                    translatedText="DeepL 敬请期待"
+                                    requesting=false
                                 }
                             }, label: {
                                 if requesting {
@@ -366,6 +376,7 @@ struct ContentView: View {
                     if nowv != Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String {
                         newpresent=false
                     }
+                    provider = ProviderAccessHelper.normalizedProvider(currentProvider: provider, productId: subscriptionProductId)
 //                    if !newpresent {
 //                        isWhatsNewSheetPresent = true
 //                    }
@@ -400,6 +411,17 @@ struct ContentView: View {
                     Button("取消", role: .cancel) {}
                 } message: {
                     Text("只有订阅用户可以请求翻译。")
+                }
+                .alert("需要升级到 Pro", isPresented: $isProviderUpgradeAlertPresent) {
+                    Button("去升级") {
+                        isSubscriptionPromptPresent = true
+                    }
+                    Button("取消", role: .cancel) {}
+                } message: {
+                    Text("当前翻译提供商仅限 Pro 用户可用。")
+                }
+                .onChange(of: subscriptionProductId) { _, newValue in
+                    provider = ProviderAccessHelper.normalizedProvider(currentProvider: provider, productId: newValue)
                 }
         }
     }

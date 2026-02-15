@@ -128,6 +128,9 @@ struct SettingsView: View {
     @AppStorage("recordHistory") var historyenable = true
     @AppStorage("DisplayHistoryEnrty") var displayhistoryenable = true
     @AppStorage("SubscriptionProductId") var subscriptionProductId = ""
+    private var allowedProviders: Set<String> {
+        ProviderAccessHelper.allowedProviders(productId: subscriptionProductId)
+    }
     var body: some View {
         List {
             Section {
@@ -182,12 +185,22 @@ struct SettingsView: View {
                 })
                 Picker("翻译提供商", selection: $provider) {
                     Section {
-                        Text("百度翻译")
-                            .tag("baidu")
-                        Text("腾讯云TC-TMT")
-                            .tag("tencent")
-                        Text("阿里云ACS-MT")
-                            .tag("ali")
+                        if allowedProviders.contains("baidu") {
+                            Text("百度翻译")
+                                .tag("baidu")
+                        }
+                        if allowedProviders.contains("tencent") {
+                            Text("腾讯云TC-TMT")
+                                .tag("tencent")
+                        }
+                        if allowedProviders.contains("ali") {
+                            Text("阿里云ACS-MT")
+                                .tag("ali")
+                        }
+                        if allowedProviders.contains("deepl") {
+                            Text("DeepL")
+                                .tag("deepl")
+                        }
                     }
                 }
                 Toggle("记录历史", isOn: $historyenable)
@@ -268,6 +281,12 @@ struct SettingsView: View {
                     Text("若您使用调试选项, 则您自愿接受调试功能所带来的风险")
                 }
             }
+        }
+        .onAppear {
+            provider = ProviderAccessHelper.normalizedProvider(currentProvider: provider, productId: subscriptionProductId)
+        }
+        .onChange(of: subscriptionProductId) { _, newValue in
+            provider = ProviderAccessHelper.normalizedProvider(currentProvider: provider, productId: newValue)
         }
     }
 }
