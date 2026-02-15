@@ -51,7 +51,7 @@ struct ContentView: View {
     @State var transfl=""
     @State var notice=""
     @AppStorage("recordHistory") var enableHistory = true
-    @AppStorage("IsSubscribed") var isSubscribed = false
+    @AppStorage("SubscriptionProductId") var subscriptionProductId = ""
     @State var isSubscriptionPromptPresent = false
     @State var isSubscriptionAlertPresent = false
     @State var latest=""
@@ -239,7 +239,7 @@ struct ContentView: View {
                         Spacer()
                         if NetPing == "ok"||debugenable{
                             Button(action: {
-                                if !isSubscribed {
+                                if !SubscriptionConfig.productIds.contains(subscriptionProductId) {
                                     isSubscriptionAlertPresent = true
                                     return
                                 }

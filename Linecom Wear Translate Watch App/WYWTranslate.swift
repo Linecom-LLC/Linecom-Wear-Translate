@@ -21,7 +21,7 @@ struct WYWTranslate: View {
         @State var wywout=""
         @State var req=false
         @AppStorage("CepheusEnable") var cepenable=false
-        @AppStorage("IsSubscribed") var isSubscribed = false
+        @AppStorage("SubscriptionProductId") var subscriptionProductId = ""
         @State var isSubscriptionPromptPresent = false
         @State var isSubscriptionAlertPresent = false
         var body: some View {
@@ -40,7 +40,7 @@ struct WYWTranslate: View {
                         CepheusKeyboard(input: $wywin,prompt:"键入文言",defaultLanguage: "zh-hans-pinyin")
                     }
                     Button(action: {
-                        if !isSubscribed {
+                        if !SubscriptionConfig.productIds.contains(subscriptionProductId) {
                             isSubscriptionAlertPresent = true
                             return
                         }

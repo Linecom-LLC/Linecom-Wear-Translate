@@ -6,6 +6,7 @@ struct SubscriptionConfig {
         "com.linecom.weartranslate.v2Basic.Monthly",
         "com.linecom.weartranslate.v2Basic.Yearly"
     ]
+    static let manageSubscriptionsURL = URL(string: "https://apps.apple.com/account/subscriptions")!
 }
 
 struct SubscriptionProduct: Identifiable {
@@ -20,6 +21,7 @@ final class SubscriptionStore: ObservableObject {
     @Published var isLoading = false
     @Published var isPurchasing = false
     @Published var isSubscribed = false
+    @Published var subscribedProductId = ""
     @Published var message = ""
 
     private let subscribedKey = "IsSubscribed"
@@ -48,7 +50,7 @@ final class SubscriptionStore: ObservableObject {
                 }
 
                 self.products = fetchedProducts.sorted { $0.title < $1.title }
-                if fetchedProducts.isEmpty {
+                if fetchedProducts.isEmpty && !self.isSubscribed {
                     self.message = "当前没有可用订阅项目"
                 }
             }
@@ -64,9 +66,7 @@ final class SubscriptionStore: ObservableObject {
                 self.isPurchasing = false
                 switch result {
                 case .success:
-                    self.isSubscribed = true
-                    UserDefaults.standard.set(true, forKey: self.subscribedKey)
-                    UserDefaults.standard.set(productId, forKey: self.subscribedProductKey)
+                    self.persistSubscription(productId: productId)
                     self.message = "订阅成功，翻译功能已解锁"
                 case .error(let error):
                     if error.code == .paymentCancelled {
@@ -93,18 +93,13 @@ final class SubscriptionStore: ObservableObject {
                     return
                 }
 
-                let hasSubscription = results.restoredPurchases.contains {
+                if let restored = results.restoredPurchases.first(where: {
                     SubscriptionConfig.productIds.contains($0.productId)
-                }
-
-                if hasSubscription {
-                    self.isSubscribed = true
-                    UserDefaults.standard.set(true, forKey: self.subscribedKey)
-                    UserDefaults.standard.set(results.restoredPurchases.first(where: {
-                        SubscriptionConfig.productIds.contains($0.productId)
-                    })?.productId ?? "", forKey: self.subscribedProductKey)
+                }) {
+                    self.persistSubscription(productId: restored.productId)
                     self.message = "已恢复订阅"
                 } else {
+                    self.clearSubscription()
                     self.message = "未找到可恢复的订阅"
                 }
             }
@@ -112,12 +107,30 @@ final class SubscriptionStore: ObservableObject {
     }
 
     func syncStatusFromStorage() {
-        isSubscribed = UserDefaults.standard.bool(forKey: subscribedKey)
+        let productId = UserDefaults.standard.string(forKey: subscribedProductKey) ?? ""
+        subscribedProductId = productId
+        isSubscribed = SubscriptionConfig.productIds.contains(productId)
+        UserDefaults.standard.set(isSubscribed, forKey: subscribedKey)
+    }
+
+    private func persistSubscription(productId: String) {
+        subscribedProductId = productId
+        isSubscribed = SubscriptionConfig.productIds.contains(productId)
+        UserDefaults.standard.set(isSubscribed, forKey: subscribedKey)
+        UserDefaults.standard.set(productId, forKey: subscribedProductKey)
+    }
+
+    private func clearSubscription() {
+        subscribedProductId = ""
+        isSubscribed = false
+        UserDefaults.standard.set(false, forKey: subscribedKey)
+        UserDefaults.standard.removeObject(forKey: subscribedProductKey)
     }
 }
 
 struct SubscriptionView: View {
     @StateObject private var store = SubscriptionStore()
+    @Environment(\.openURL) private var openURL
 
     var body: some View {
         List {
@@ -127,34 +140,49 @@ struct SubscriptionView: View {
                         .foregroundColor(store.isSubscribed ? .green : .orange)
                     Text(store.isSubscribed ? "已订阅" : "未订阅")
                 }
+                if store.isSubscribed {
+                    Text("当前订阅：\(store.subscribedProductId)")
+                        .font(.caption2)
+                        .foregroundColor(.gray)
+                }
             } header: {
                 Text("订阅状态")
             }
 
-            Section {
-                if store.isLoading {
-                    ProgressView("正在加载订阅项目")
-                } else {
-                    ForEach(store.products) { product in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(product.title)
-                            Text(product.description)
-                                .font(.caption2)
-                                .foregroundColor(.gray)
-                            Text(product.price)
-                                .font(.caption)
-                                .foregroundColor(.blue)
-                        }
-                        .padding(.vertical, 2)
-
-                        Button("订阅") {
-                            store.purchase(productId: product.id)
-                        }
-                        .disabled(store.isPurchasing)
+            if store.isSubscribed {
+                Section {
+                    Button("管理订阅") {
+                        openURL(SubscriptionConfig.manageSubscriptionsURL)
                     }
+                } footer: {
+                    Text("将打开 App Store 订阅管理页面")
                 }
-            } header: {
-                Text("可用订阅")
+            } else {
+                Section {
+                    if store.isLoading {
+                        ProgressView("正在加载订阅项目")
+                    } else {
+                        ForEach(store.products) { product in
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(product.title)
+                                Text(product.description)
+                                    .font(.caption2)
+                                    .foregroundColor(.gray)
+                                Text(product.price)
+                                    .font(.caption)
+                                    .foregroundColor(.blue)
+                            }
+                            .padding(.vertical, 2)
+
+                            Button("订阅") {
+                                store.purchase(productId: product.id)
+                            }
+                            .disabled(store.isPurchasing)
+                        }
+                    }
+                } header: {
+                    Text("可用订阅")
+                }
             }
 
             Section {
@@ -164,6 +192,7 @@ struct SubscriptionView: View {
                 .disabled(store.isLoading || store.isPurchasing)
 
                 Button("刷新项目") {
+                    store.syncStatusFromStorage()
                     store.load()
                 }
                 .disabled(store.isLoading || store.isPurchasing)
@@ -179,7 +208,9 @@ struct SubscriptionView: View {
         }
         .onAppear {
             store.syncStatusFromStorage()
-            store.load()
+            if !store.isSubscribed {
+                store.load()
+            }
         }
     }
 }

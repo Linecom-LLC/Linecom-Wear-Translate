@@ -127,7 +127,7 @@ struct SettingsView: View {
     @AppStorage("IDEmail") var idemail = ""
     @AppStorage("recordHistory") var historyenable = true
     @AppStorage("DisplayHistoryEnrty") var displayhistoryenable = true
-    @AppStorage("IsSubscribed") var isSubscribed = false
+    @AppStorage("SubscriptionProductId") var subscriptionProductId = ""
     var body: some View {
         List {
             Section {
@@ -175,9 +175,9 @@ struct SettingsView: View {
                         Image(systemName: "crown")
                         Text("订阅")
                         Spacer()
-                        Text(isSubscribed ? "已订阅" : "未订阅")
+                        Text(SubscriptionConfig.productIds.contains(subscriptionProductId) ? "已订阅" : "未订阅")
                             .font(.caption2)
-                            .foregroundColor(isSubscribed ? .green : .orange)
+                            .foregroundColor(SubscriptionConfig.productIds.contains(subscriptionProductId) ? .green : .orange)
                     }
                 })
                 Picker("翻译提供商", selection: $provider) {
