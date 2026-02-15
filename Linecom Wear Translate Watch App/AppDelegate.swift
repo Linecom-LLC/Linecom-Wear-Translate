@@ -8,12 +8,26 @@
 
 import WatchKit
 import PushKit
+import SwiftyStoreKit
 
 final class AppDelegate: NSObject, WKExtensionDelegate, PKPushRegistryDelegate {
 
     private var pushRegistry: PKPushRegistry?
 
     func applicationDidFinishLaunching() {
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    break
+                case .failed, .purchasing, .deferred:
+                    break
+                @unknown default:
+                    break
+                }
+            }
+        }
+
         // 初始化 PushKit 并注册推送类型
         setupPushKit()
     }

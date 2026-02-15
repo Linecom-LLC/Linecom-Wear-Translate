@@ -3,8 +3,8 @@ import SwiftyStoreKit
 
 struct SubscriptionConfig {
     static let productIds: Set<String> = [
-        "com.linecom.weartranslate.subscription.monthly",
-        "com.linecom.weartranslate.subscription.yearly"
+        "com.linecom.weartranslate.v2Basic.Monthly",
+        "com.linecom.weartranslate.v2Basic.Yearly"
     ]
 }
 
