@@ -5,16 +5,16 @@ struct SubscriptionConfig {
     static let productIds: Set<String> = [
         "com.linecom.weartranslate.v2Basic.Monthly",
         "com.linecom.weartranslate.v2Basic.Yearly",
-        "com.linecom.weartranslate.v2Pro.Monthly",
-        "com.linecom.weartranslate.v2Pro.Yearly"
+        "com.linecom.weartranslate.v2Professional.Monthly",
+        "com.linecom.weartranslate.v2Professional.Yearly"
     ]
     static let basicProductIds: Set<String> = [
         "com.linecom.weartranslate.v2Basic.Monthly",
         "com.linecom.weartranslate.v2Basic.Yearly"
     ]
     static let proProductIds: Set<String> = [
-        "com.linecom.weartranslate.v2Pro.Monthly",
-        "com.linecom.weartranslate.v2Pro.Yearly"
+        "com.linecom.weartranslate.v2Professional.Monthly",
+        "com.linecom.weartranslate.v2Professional.Yearly"
     ]
 
     static func isBasic(_ productId: String) -> Bool {
@@ -102,7 +102,7 @@ final class SubscriptionStore: ObservableObject {
 
                 let fetchedProducts = result.retrievedProducts.map {
                     SubscriptionProduct(
-                        id: $0.productId,
+                        id: $0.productIdentifier,
                         title: $0.localizedTitle,
                         description: $0.localizedDescription,
                         price: $0.localizedPrice ?? "--"

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		030F238E2BEF9EA700E8D4FA /* SwiftyStoreKit in Frameworks */ = {isa = PBXBuildFile; productRef = 030F238D2BEF9EA700E8D4FA /* SwiftyStoreKit */; };
-		030F23902BEFA17600E8D4FA /* BuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030F238F2BEFA17600E8D4FA /* BuyView.swift */; };
 		03120FC72BE285DF008D0B76 /* ExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03120FC62BE285DF008D0B76 /* ExperimentView.swift */; };
 		031C62C42CCA139200A865EC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031C62C32CCA139200A865EC /* WidgetKit.framework */; };
 		031C62C62CCA139200A865EC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031C62C52CCA139200A865EC /* SwiftUI.framework */; };
@@ -120,7 +119,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		030F238F2BEFA17600E8D4FA /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
 		03120FC62BE285DF008D0B76 /* ExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentView.swift; sourceTree = "<group>"; };
 		031C62C22CCA139200A865EC /* Tap-to-Open-LWTExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Tap-to-Open-LWTExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		031C62C32CCA139200A865EC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -285,7 +283,6 @@
 				03A1615D2CAD8B6600E9FC90 /* AppDelegate.swift */,
 				0328986B2CAAE3CD0000B06D /* WhatsNewView.swift */,
 				03BB21022C2EA3960048BF18 /* WYWTranslate.swift */,
-				030F238F2BEFA17600E8D4FA /* BuyView.swift */,
 				03428C5F2B9219590025849C /* Assets.xcassets */,
 				0328986A2CAAE39E0000B06D /* Include */,
 				032898682CAAE34E0000B06D /* History */,
@@ -544,7 +541,6 @@
 				03BB21032C2EA3960048BF18 /* WYWTranslate.swift in Sources */,
 				03428C5E2B9219580025849C /* ContentView.swift in Sources */,
 				036F3C8E2B92342B0080194C /* md5c.swift in Sources */,
-				030F23902BEFA17600E8D4FA /* BuyView.swift in Sources */,
 				033740D32C002DF800A7259F /* LinecomBase.swift in Sources */,
 				032898492CAAC5330000B06D /* HistoryDetailView.swift in Sources */,
 				032898472CAAC5060000B06D /* HistoryView.swift in Sources */,
